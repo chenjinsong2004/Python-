@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>模板语法学习</h1>
+    <div>{{ n1 }}</div>
+    <div>{{ n2.0 }}</div>
+    <div>{{ n2.1 }}</div>
+    <div>{{ n2.2 }}</div>
+    <div>
+        {% for item in n2 %}
+            <span>{{ item }}</span>
+        {% endfor %}
+    </div>
+    {{n3.name}}
+    <ul>
+        {% for item in n3.keys %}
+            <li>{{item}}</li>
+        {% endfor %}
+    </ul>
+       
+    
+
+</body>
+</html>
