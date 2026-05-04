@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<form method="get">
+    <div class="input-group" style="float: right;width: 300px;">
+
+        <input type="text" name="q" class="form-control" placeholder="寻找......" value="{{search_data}}" _mstplaceholder="164775" _msthash="653">
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="submit" _msttexthash="10084152" _msthash="654">走！</button>
+        </span>
+
+    </div>
+</form>
+<div>
+    <!-- 在新页面打开 target="_blank" -->
+    <a class="btn btn-primary" href="/myadmin/add/" style="margin-bottom:10px" target="_blank">添加管理员</a>
+
+</div>
+
+<div class="panel panel-default">
+
+    <!-- Default panel contents -->
+    <div class="panel-heading">
+        <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+        管理员列表
+    </div>
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户</th>
+                <th>密码</th>
+                <th>重置密码</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for obj in queryset %}
+            <tr>
+                <th scope="row">{{obj.id}}</th>
+                <td>{{obj.username}}</td>
+                <td>**************</td>
+                <td>
+                    <a href="/myadmin/{{obj.id}}/reset/">重置密码</a>
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-xs" href="/myadmin/{{obj.id}}/edit/">编辑</a>
+                    <a class="btn btn-danger btn-xs" href="/myadmin/{{obj.id}}/delete/">删除</a>
+                </td>
+            </tr>
+            {% endfor %}
+
+
+        </tbody>
+    </table>
+</div>
+<ul class="pagination">
+    <li>
+        <a href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+        </a>
+    </li>
+    {{page_string}}
+    <li>
+        <a href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+        </a>
+    </li>
+</ul>
+</nav>
+{% endblock %}

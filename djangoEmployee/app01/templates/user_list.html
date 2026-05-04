@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div>
+        <!-- 在新页面打开 target="_blank" -->
+        <a class="btn btn-primary" href="/user/add" style="margin-bottom:10px" target="_blank">新建用户</a>
+        <a class="btn btn-primary" href="/user/model/add" style="margin-bottom:10px" target="_blank">新建用户ModelForm</a>
+    </div>
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+            部门列表
+            
+        </div>
+
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名字</th>
+                    <th>年龄</th>
+                    <th>工资</th>
+                    <th>入职时间</th>
+                    <th>部门</th>
+                    <th>性别</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for obj in queryset %}
+                    <tr>
+                        <th scope="row">{{obj.id}}</th>
+                        <td>{{obj.name}}</td>
+                        <td>{{obj.age}}</td>
+                        <td>{{obj.account}}</td>
+                        <!-- 特殊的三个，要用一些手段 -->
+                        <td>{{obj.create_time}}</td>
+                        <td>{{obj.depart.title}}</td>
+                        <td>{{obj.get_gender_display}}</td>
+                        <td>
+                            <a class="btn btn-primary btn-xs" href="/user/{{obj.id}}/edit">编辑</a>
+                            <a class="btn btn-danger btn-xs" href="/user/{{obj.id}}/delete">删除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+      {{page_string}}
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+{% endblock %}

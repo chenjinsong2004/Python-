@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrap-3.4.1/css/bootstrap.css' %}">
+    <style>
+        .account {
+            width: 400px;
+            border: 1px solid #dddddd;
+            box-shadow: 5px 5px 20px #aaa;
+
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            padding: 20px 40px;
+        }
+
+        .account h2 {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        input {
+            width: 80%;
+            height: 30px;
+            padding: 0 15px;
+            font-size: 1rem;
+            border: 1px solid #dcdfe6;
+            border-radius: 6px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .login-btn {
+            width: auto;
+            padding: 12px 30px;
+            background-color: #2e5fcc;
+            color: #ffffff;
+            border: none;
+            margin-top: 5px;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .login-btn:hover {
+            background-color: #254fa8;
+        }
+
+        .field-error {
+            color: #dc3545;
+            /* 红色字体 */
+            font-size: 14px;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="account">
+        <h2>用户登录</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <div>用户名</div>
+                {{form.username}}
+            </div>
+
+            <div class="input-group">
+                <div>密码</div>
+                {{form.password}}
+                <div class="field-error">
+                    {% for error in form.password.errors %}
+                    {{ error }}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_code">图片验证码</label>
+                <div class="row">
+                    <div class="col-xs-7">
+                        {{form.code}}
+                        <div class="field-error">
+                            {% for error in form.code.errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                        <span style="color: #dc3545;"></span>
+                    </div>
+                    <div class="col-xs-5">
+                        <img src="/image/code/" onclick="this.src='/image/code/?'+Math.random()" style="width: 125px; cursor:pointer;">
+                    </div>
+                </div>
+            </div>
+            <button class="login-btn">登录</button>
+        </form>
+    </div>
+</body>
+
+<script src="{% static 'js/jquery-3.6.0.js' %}"></script>
+<script src="{% static 'plugins/bootstrap3.4.1/js/bootstrap.js' %}"></script>
+
+</html>
